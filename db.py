@@ -1,5 +1,0 @@
-
-stores = {        
-    }
-items = {
-}
