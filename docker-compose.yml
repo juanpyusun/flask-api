@@ -1,0 +1,8 @@
+version: '3' # Specify the version of the Compose file format
+services: # Define the services that make up the app
+  web: # Define the web service also can be named as app
+    build: . # Build from the Dockerfile in the current directory
+    ports:  # Expose ports
+      - "5000:5000" # Host:Container
+    volumes: # Mount the code into the container
+      - .:/app # Host:Container, the name used in the Dockerfile
