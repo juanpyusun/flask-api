@@ -1,5 +1,6 @@
 from flask_smorest import abort, Blueprint
 from flask.views import MethodView
+from flask_jwt_extended import jwt_required
 from sqlalchemy.exc import SQLAlchemyError
 
 from db import db
@@ -10,6 +11,7 @@ blp = Blueprint('Items', __name__)
 
 @blp.route('/item/<int:item_id>')
 class Item(MethodView):
+    @jwt_required() # Se agrega en cada método que requiera autenticación
     @blp.response(200, ItemSchema) # Genera una respuesta  200 y cualquier cosa que se retorne pasara por el esquema ItemSchema (verificando las condiciones del esquema)
     def get(self, item_id):
         item = ItemModel.query.get_or_404(item_id)
@@ -22,6 +24,7 @@ class Item(MethodView):
         db.session.commit()
         return {"message": "Item deleted successfully"}
         
+    @jwt_required()    
     @blp.arguments(ItemUpdateSchema) # los argumentos de entrada pasaran por el esquema ItemUpdateSchema
     @blp.response(200, ItemSchema) # Genera una respuesta  200 y cualquier cosa que se retorne pasara por el esquema ItemSchema (verificando las condiciones del esquema)
     def put(self, item_data, item_id):
@@ -39,10 +42,12 @@ class Item(MethodView):
 
 @blp.route('/item')
 class ItemList(MethodView):
+    @jwt_required()
     @blp.response(200, ItemSchema(many=True))
     def get(self):
         return ItemModel.query.all()
     
+    @jwt_required()
     @blp.arguments(ItemSchema)
     @blp.response(201, ItemSchema)
     def post(self, item_data):
