@@ -39,6 +39,13 @@ def create_app(db_url=None):
     # Inicializando el JWTManager
     jwt = JWTManager(app)
     
+    # Función para obtener el identificador del usuario
+    @jwt.additional_claims_loader
+    def add_claims_to_jwt(identity): # Recordemos que el identity es el id del usuario que viene encapsulado en el token
+        if identity == 1:
+            return {"is_admin": True}
+        return {"is_admin": False}
+        
     # Funciones para manejar errores de autenticación
     @jwt.expired_token_loader
     def expired_token_callback(jwt_header, jwt_payload):

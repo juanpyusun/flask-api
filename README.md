@@ -56,8 +56,11 @@ docker compose up
 ```shell
 docker run -dp 5005:5000 -w /app -v "c:/app" rest-apis-flask-python-personal-training
 ```
+# Manipulacion de Inomnia
 
 
+***
+***
 # Teoria API
 - **recurso:** URI's para acceder a la manipulacion o lectura de nuestra API, en este ejemplo seria `/users`
 - **endpoint:** la URL completa `http://127.0.0.1:5000/users`
@@ -128,5 +131,3 @@ Ejemplos:
 Se recomienda en el cuerpo de la respuesta agregar informacion como la pagina actual, las paginas totales y el total de registros
 - `/users?limit=20` de 20 en 20
 - `/users?page=1&take=20` de la pagina 1 tomar 20 valores
-
-### Errores 

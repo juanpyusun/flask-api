@@ -1,6 +1,6 @@
 from flask_smorest import abort, Blueprint
 from flask.views import MethodView
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt
 from sqlalchemy.exc import SQLAlchemyError
 
 from db import db
@@ -18,7 +18,13 @@ class Item(MethodView):
         return item
     
     # No se necesita un decorador y esquema para la respuesta, ya que solo se retorna un mensaje
+    @jwt_required()
     def delete(self, item_id):
+        # Este bloque de código verifica si el usuario es administrador
+        jwt = get_jwt()
+        if not jwt.get("is_admin"):
+            abort(401, message="Admin privilege required.")
+            
         item = ItemModel.query.get_or_404(item_id)
         db.session.delete(item)
         db.session.commit()
