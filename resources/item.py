@@ -8,7 +8,7 @@ from schemas import ItemSchema, ItemUpdateSchema
 
 blp = Blueprint('Items', __name__)
 
-@blp.route('/item/<string:item_id>')
+@blp.route('/item/<int:item_id>')
 class Item(MethodView):
     @blp.response(200, ItemSchema) # Genera una respuesta  200 y cualquier cosa que se retorne pasara por el esquema ItemSchema (verificando las condiciones del esquema)
     def get(self, item_id):
