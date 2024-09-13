@@ -53,7 +53,7 @@ class ItemList(MethodView):
     def get(self):
         return ItemModel.query.all()
     
-    @jwt_required()
+    @jwt_required(fresh=True) # Con fresh=True, se requiere que el token sea fresco, es decir, que haya sido emitido por el servidor
     @blp.arguments(ItemSchema)
     @blp.response(201, ItemSchema)
     def post(self, item_data):
