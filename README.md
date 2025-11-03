@@ -131,3 +131,37 @@ Ejemplos:
 Se recomienda en el cuerpo de la respuesta agregar informacion como la pagina actual, las paginas totales y el total de registros
 - `/users?limit=20` de 20 en 20
 - `/users?page=1&take=20` de la pagina 1 tomar 20 valores
+
+
+---
+## Ordenar
+
+creacion del entorno virtual py -3 -m venv .venv
+F1 en vs-code y Python: Select Interpreter, finalmente seleccionar la opcion que contiene las palabras venv, de esta manera la terminal usada durante el proyecto activara automaticamente el entorno
+descargar archivo .gitignore de toptal
+inicio del repositorio git init, git add .y git commit -m "first commit"
+creacion Dockerfile
+creacion de la estructura de carpetas
+/: raiz
+src: Carpeta principal con todo el codigo
+database: Contiene informacion de conexion a la base de datos
+resources o routes: Contiene todas las rutas o endpoints
+models: Contiene las clases que manejan la logica de la base de datos, todos los queries necesarios
+services: Contiene todas las operaciones logicas que podemos hacer con los modelos
+utils: Contiene todo lo relacionado a la seguridad y manejo de tokens
+tests: Contiene todo lo relacionado a las pruebas sobre el codigo
+.env: Variables de entorno que no se deben compartir
+.gitignore: Archivos locales innecesarios de compartir
+config.py: Todas las configuraciones de la app
+app.py: Se encarga de lanzar toda la aplicacion
+Dockerfile: Informacion del contenedor
+README.md: Guia sobre el proyecto
+para que las carpetas funcionen como modulos, cada una debe contener un archivo llamado __init__.py, incluida la propia carpeta src
+instalar los paquetes necesarios
+flask: Libreria principal
+python-dotenv para usar el .env
+generar listado de requerimientos pip freeze > requirements.txt
+crear imagen docker docker build -t prueba-tecnica . para comprobar que todo funcione correctamente hasta este punto
+Creacion de los modelos department, employment_recordy job; cumpliendo con las especificaciones de las tablas encontradas en los documentos *.csv
+Creacion del archivo schemas para el manejo de errores en el ingreso de datos, (¿Es este el dto?)
+Creacion de los endpoints jobs, departments y employment-records con dummy data de respuesta
